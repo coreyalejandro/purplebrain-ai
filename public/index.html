@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PurpleBrain - Your Purple Rain Desktop</title>
+    <style>
+        /* PurpleBrain - Prince Purple Rain Color Palette */
+        :root {
+            /* Primary Purple Rain Colors */
+            --purple-royal: #800080;
+            --purple-deep: #4B0082;
+            --purple-soft: #9370DB;
+            --purple-light: #DDA0DD;
+            --purple-mist: #E6E6FA;
+
+            /* Theatrical Smoke & Atmosphere */
+            --smoke-dark: #2F2F2F;
+            --smoke-medium: #5A5A5A;
+            --smoke-light: #8B8B8B;
+            --smoke-whisper: #C0C0C0;
+
+            /* Ornate Gold Accents */
+            --gold-rich: #FFD700;
+            --gold-warm: #DAA520;
+            --gold-soft: #F0E68C;
+
+            /* Dramatic Depths */
+            --black-theatrical: #1A1A1A;
+            --black-velvet: #000000;
+            --white-stage: #FFFFFF;
+            --white-silk: #F8F8FF;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--black-theatrical);
+            color: var(--white-stage);
+            overflow: hidden;
+            cursor: none; /* Hide cursor for immersive experience */
+        }
+
+        .purple-rain-desktop {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background: 
+                radial-gradient(ellipse at 30% 70%, var(--purple-royal) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 30%, var(--purple-deep) 0%, transparent 50%),
+                linear-gradient(135deg, var(--black-theatrical) 0%, var(--smoke-dark) 100%);
+        }
+
+        .paisley-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 10c-15 0-25 10-25 25 0 10 5 15 15 20-10 5-15 10-15 20 0 15 10 25 25 25s25-10 25-25c0-10-5-15-15-20 10-5 15-10 15-20 0-15-10-25-25-25z' fill='%23800080' opacity='0.1'/%3E%3C/svg%3E");
+            animation: paisley-flow 30s infinite linear;
+            pointer-events: none;
+        }
+
+        .mirror-surface {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .mirror-surface::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.1) 0%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.05) 100%
+            );
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        .agent-store {
+            position: absolute;
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 600px;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        .agent-card {
+            width: 100%;
+            height: 80px;
+            margin: 15px 0;
+            padding: 20px;
+            background: var(--purple-royal);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(128, 0, 128, 0.3);
+        }
+
+        .agent-card:hover {
+            transform: translateX(10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(128, 0, 128, 0.5);
+        }
+
+        .workspace-canvas {
+            position: absolute;
+            right: 50px;
+            top: 50px;
+            bottom: 50px;
+            left: 400px;
+            border-radius: 25px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--purple-soft);
+        }
+
+        .prince-signature {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 14px;
+            color: var(--purple-light);
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        @keyframes paisley-flow {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1); }
+            75% { transform: rotate(270deg) scale(0.9); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes mirror-pulse {
+            0% { box-shadow: 0 0 20px rgba(128, 0, 128, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(128, 0, 128, 0.6); }
+            100% { box-shadow: 0 0 20px rgba(128, 0, 128, 0.3); }
+        }
+
+        .loading-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: var(--purple-light);
+            text-align: center;
+            animation: mirror-pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="purple-rain-desktop">
+        <!-- Paisley Pattern Overlay -->
+        <div class="paisley-pattern"></div>
+        
+        <!-- Agent Store - Left Sidebar -->
+        <div class="agent-store mirror-surface">
+            <h2 style="color: var(--gold-rich); margin-bottom: 30px; text-align: center;">AgentStore</h2>
+            
+            <div class="agent-card" id="research-agent">
+                <div>🔍 Research Agent</div>
+            </div>
+            
+            <div class="agent-card" id="factcheck-agent">
+                <div>✅ Fact-Check Agent</div>
+            </div>
+            
+            <div class="agent-card" id="writing-agent">
+                <div>📝 Writing Agent</div>
+            </div>
+            
+            <div class="agent-card" id="visionary-agent">
+                <div>🎨 Visionary Agent</div>
+            </div>
+            
+            <div class="agent-card" id="conductor-agent">
+                <div>🎼 Conductor Agent</div>
+            </div>
+        </div>
+
+        <!-- Main Workspace Canvas -->
+        <div class="workspace-canvas mirror-surface">
+            <div class="loading-text">
+                <div>🎵 PurpleBrain Initializing...</div>
+                <div style="font-size: 16px; margin-top: 10px;">Your Purple Rain Desktop Environment</div>
+            </div>
+        </div>
+
+        <!-- Prince Signature -->
+        <div class="prince-signature">
+            "Dearly beloved, we are gathered here today to get through this thing called life" - Prince 💜
+        </div>
+    </div>
+
+    <script type="module" src="/src/app.js"></script>
+</body>
+</html>

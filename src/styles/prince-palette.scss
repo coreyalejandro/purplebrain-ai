@@ -1,0 +1,90 @@
+// PurpleBrain - Prince Purple Rain Color Palette
+// Honoring the Purple One's aesthetic legacy
+
+:root {
+  // Primary Purple Rain Colors
+  --purple-royal: #800080;           // Prince's signature royal purple
+  --purple-deep: #4B0082;            // Indigo depth
+  --purple-soft: #9370DB;            // Medium slate blue
+  --purple-light: #DDA0DD;           // Plum highlights
+  --purple-mist: #E6E6FA;            // Lavender whispers
+
+  // Theatrical Smoke & Atmosphere
+  --smoke-dark: #2F2F2F;             // Urban shadows
+  --smoke-medium: #5A5A5A;           // Billowing gray
+  --smoke-light: #8B8B8B;            // Soft haze
+  --smoke-whisper: #C0C0C0;          // Silver mist
+
+  // Ornate Gold Accents
+  --gold-rich: #FFD700;              // Prince's ornate details
+  --gold-warm: #DAA520;              // Goldenrod elegance
+  --gold-soft: #F0E68C;              // Khaki highlights
+
+  // Dramatic Depths
+  --black-theatrical: #1A1A1A;       // Cinematic black
+  --black-velvet: #000000;           // Pure void
+  --white-stage: #FFFFFF;            // Spotlight white
+  --white-silk: #F8F8FF;             // Ghost white
+
+  // Mirror & Reflection Effects
+  --mirror-shine: rgba(255, 255, 255, 0.3);
+  --mirror-shadow: rgba(0, 0, 0, 0.4);
+  --reflection-gradient: linear-gradient(180deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    transparent 100%);
+
+  // Paisley Pattern Colors (Neurodivergent Brain)
+  --paisley-primary: var(--purple-royal);
+  --paisley-secondary: var(--gold-rich);
+  --paisley-accent: var(--purple-soft);
+  --paisley-flow: var(--smoke-medium);
+}
+
+// Mirror Effect Mixins
+@mixin mirror-surface {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--reflection-gradient);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+}
+
+@mixin paisley-background($opacity: 0.1) {
+  background-image: 
+    radial-gradient(ellipse at 20% 80%, var(--paisley-primary) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, var(--paisley-secondary) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 40%, var(--paisley-accent) 0%, transparent 50%);
+  background-size: 200px 200px, 150px 150px, 100px 100px;
+  background-position: 0 0, 50px 50px, 100px 100px;
+  opacity: $opacity;
+}
+
+// Theatrical Lighting
+@mixin stage-lighting {
+  box-shadow: 
+    0 0 20px rgba(var(--purple-royal), 0.3),
+    inset 0 1px 0 var(--mirror-shine),
+    inset 0 -1px 0 var(--mirror-shadow);
+}
+
+// Neurodivergent Flow Animation
+@keyframes paisley-flow {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(90deg) scale(1.1); }
+  50% { transform: rotate(180deg) scale(1); }
+  75% { transform: rotate(270deg) scale(0.9); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@mixin neural-flow {
+  animation: paisley-flow 20s infinite ease-in-out;
+}

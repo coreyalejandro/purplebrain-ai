@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PurpleBrain - Your Purple Rain AI Workspace</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <style>
+        /* PurpleBrain - Prince Purple Rain Album Color Palette */
+        :root {
+            /* Deep Purple Rain Album Colors */
+            --purple-rain-deep: #2D1B69;
+            --purple-rain-shadow: #1A0E3D;
+            --purple-rain-accent: #4A2C7A;
+            --purple-rain-mist: #6B4C9F;
+
+            /* Album Cover Dark Tones */
+            --album-black: #0F0A1A;
+            --album-charcoal: #1C1429;
+            --album-midnight: #262038;
+            --album-shadow: #322947;
+
+            /* Cream & Light Accents */
+            --cream-soft: #F4F1E8;
+            --cream-warm: #E8E2D5;
+            --cream-muted: #D4CFC4;
+
+            /* Paisley Accent Colors */
+            --paisley-gold: #B8860B;
+            --paisley-rose: #8B6F7D;
+            --paisley-sage: #6B7B5F;
+
+            /* Interface Essentials */
+            --text-primary: var(--cream-soft);
+            --text-secondary: var(--cream-muted);
+            --text-accent: var(--paisley-gold);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: var(--text-primary);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .purple-rain-desktop {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background: 
+                radial-gradient(ellipse at 70% 40%, rgba(147, 51, 234, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 30% 60%, rgba(79, 70, 229, 0.3) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 20%, rgba(219, 39, 119, 0.2) 0%, transparent 60%),
+                linear-gradient(135deg, #000000 0%, #0f0f23 50%, #1a0b2e 100%);
+        }
+
+        .neural-brain {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            width: 400px;
+            height: 300px;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .brain-visualization {
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse 60% 45% at 50% 50%, 
+                    rgba(147, 51, 234, 0.8) 0%,
+                    rgba(79, 70, 229, 0.6) 30%,
+                    rgba(59, 130, 246, 0.4) 60%,
+                    transparent 100%);
+            border-radius: 50% 50% 45% 55% / 60% 55% 45% 40%;
+            position: relative;
+            animation: brain-pulse 4s ease-in-out infinite;
+        }
+
+        .neural-network {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(236, 72, 153, 0.8) 2px, transparent 2px),
+                radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.8) 2px, transparent 2px),
+                radial-gradient(circle at 60% 70%, rgba(147, 51, 234, 0.8) 2px, transparent 2px),
+                radial-gradient(circle at 30% 80%, rgba(79, 70, 229, 0.8) 2px, transparent 2px),
+                radial-gradient(circle at 70% 40%, rgba(219, 39, 119, 0.8) 2px, transparent 2px),
+                radial-gradient(circle at 40% 50%, rgba(168, 85, 247, 0.8) 2px, transparent 2px);
+            background-size: 50px 50px, 60px 60px, 40px 40px, 55px 55px, 45px 45px, 35px 35px;
+            animation: neural-pulse 3s ease-in-out infinite alternate;
+        }
+
+        .neural-connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, rgba(147, 51, 234, 0.3) 49%, rgba(147, 51, 234, 0.3) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(59, 130, 246, 0.3) 49%, rgba(59, 130, 246, 0.3) 51%, transparent 52%),
+                linear-gradient(135deg, transparent 48%, rgba(236, 72, 153, 0.3) 49%, rgba(236, 72, 153, 0.3) 51%, transparent 52%);
+            background-size: 30px 30px, 40px 40px, 35px 35px;
+            animation: connection-flow 5s linear infinite;
+        }
+
+        @keyframes brain-pulse {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                filter: brightness(1) hue-rotate(0deg);
+            }
+            50% { 
+                transform: scale(1.05) rotate(1deg);
+                filter: brightness(1.2) hue-rotate(10deg);
+            }
+        }
+
+        @keyframes neural-pulse {
+            0% { 
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            100% { 
+                opacity: 1;
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes connection-flow {
+            0% { 
+                background-position: 0 0, 0 0, 0 0;
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% { 
+                background-position: 30px 30px, 40px 40px, 35px 35px;
+                opacity: 0.4;
+            }
+        }
+
+        .sidebar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(15, 10, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(244, 241, 232, 0.1);
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(244, 241, 232, 0.08);
+        }
+
+        .sidebar-logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-accent);
+            margin-bottom: 8px;
+        }
+
+        .sidebar-subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        .sidebar-nav {
+            padding: 16px 0;
+        }
+
+        .nav-section {
+            margin-bottom: 8px;
+        }
+
+        .nav-section-header {
+            padding: 12px 20px 8px 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+        }
+
+        .nav-item {
+            padding: 10px 20px;
+            color: var(--text-primary);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: rgba(244, 241, 232, 0.05);
+            border-left-color: var(--text-accent);
+        }
+
+        .nav-item.active {
+            background: rgba(184, 134, 11, 0.1);
+            border-left-color: var(--text-accent);
+            color: var(--text-accent);
+        }
+
+        .main-content {
+            position: absolute;
+            left: 280px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+
+        .content-pane {
+            display: none;
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .content-pane.active {
+            display: block;
+        }
+
+        .agent-store-header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .agent-store-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-accent);
+            margin-bottom: 8px;
+        }
+
+        .agent-store-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            opacity: 0.8;
+        }
+
+        .agent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .agent-card {
+            background: rgba(28, 20, 41, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(244, 241, 232, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 4px 20px rgba(45, 27, 105, 0.15),
+                inset 0 1px 0 rgba(244, 241, 232, 0.04);
+        }
+
+        .agent-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                transparent, 
+                rgba(184, 134, 11, 0.06), 
+                transparent
+            );
+            transition: left 0.8s ease;
+        }
+
+        .agent-card:hover::before {
+            left: 100%;
+        }
+
+        .agent-card:hover {
+            transform: translateY(-3px);
+            background: rgba(38, 32, 56, 0.85);
+            border-color: rgba(244, 241, 232, 0.18);
+            box-shadow: 
+                0 8px 30px rgba(45, 27, 105, 0.25),
+                0 2px 8px rgba(184, 134, 11, 0.08),
+                inset 0 1px 0 rgba(244, 241, 232, 0.06);
+        }
+
+        .agent-card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .agent-icon {
+            width: 32px;
+            height: 32px;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 8px rgba(184, 134, 11, 0.4));
+        }
+
+        .agent-card:hover .agent-icon {
+            opacity: 1;
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 12px rgba(184, 134, 11, 0.6));
+        }
+
+        .agent-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .agent-persona {
+            font-size: 12px;
+            color: var(--text-accent);
+            opacity: 0.8;
+        }
+
+        .agent-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+
+        .agent-capabilities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .capability-tag {
+            background: rgba(184, 134, 11, 0.1);
+            border: 1px solid rgba(184, 134, 11, 0.2);
+            color: var(--text-accent);
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .agent-status {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00ff00;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: rgba(28, 20, 41, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(244, 241, 232, 0.2);
+            border-radius: 20px;
+            margin: 5% auto;
+            padding: 40px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(45, 27, 105, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close {
+            color: var(--text-secondary);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .close:hover {
+            color: var(--text-accent);
+        }
+
+        .task-input {
+            width: 100%;
+            background: rgba(15, 10, 26, 0.8);
+            border: 1px solid rgba(244, 241, 232, 0.2);
+            border-radius: 8px;
+            color: var(--text-primary);
+            padding: 12px 16px;
+            font-size: 14px;
+            font-family: inherit;
+            margin: 16px 0;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .task-input:focus {
+            outline: none;
+            border-color: var(--text-accent);
+            box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.2);
+        }
+
+        .action-button {
+            background: linear-gradient(45deg, var(--purple-rain-accent), var(--purple-rain-mist));
+            color: var(--text-primary);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 8px;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(75, 44, 122, 0.3);
+        }
+
+        .action-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-container {
+            background: rgba(15, 10, 26, 0.5);
+            border: 1px solid rgba(244, 241, 232, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(184, 134, 11, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--text-accent);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .prince-signature {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        .status-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(28, 20, 41, 0.9);
+            border: 1px solid rgba(244, 241, 232, 0.2);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-size: 12px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="purple-rain-desktop">
+        <div class="neural-brain">
+            <div class="brain-visualization">
+                <div class="neural-network"></div>
+                <div class="neural-connections"></div>
+            </div>
+        </div>
+        
+        <!-- Status Indicator -->
+        <div class="status-indicator" id="status-indicator">
+            🔌 Connecting to PurpleBrain...
+        </div>
+        
+        <!-- ZBrain-style Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">PurpleBrain</div>
+                <div class="sidebar-subtitle">Your Purple Rain AI Workspace</div>
+            </div>
+            
+            <div class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-header">PurpleBrain Builder</div>
+                    <div class="nav-item" data-pane="get-started">Get Started</div>
+                    <div class="nav-item" data-pane="components">Components</div>
+                    <div class="nav-item" data-pane="knowledge-base">Knowledge Base</div>
+                    <div class="nav-item" data-pane="app">App</div>
+                    <div class="nav-item active" data-pane="agent-store">AI Agents</div>
+                    <div class="nav-item" data-pane="prompts">Prompts</div>
+                    <div class="nav-item" data-pane="monitor">Monitor</div>
+                    <div class="nav-item" data-pane="security">Security Features</div>
+                    <div class="nav-item" data-pane="settings">Settings</div>
+                    <div class="nav-item" data-pane="api">API Tutorials</div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-header">PurpleBrain XPLR</div>
+                    <div class="nav-item" data-pane="xplr-modules">XPLR Modules</div>
+                    <div class="nav-item" data-pane="simulation">Simulation XPLR</div>
+                    <div class="nav-item" data-pane="taxonomy">Taxonomy XPLR</div>
+                    <div class="nav-item" data-pane="solution">Solution XPLR</div>
+                    <div class="nav-item" data-pane="portfolio">Portfolio XPLR</div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-header">Release Notes</div>
+                    <div class="nav-item" data-pane="builder-notes">Builder Release Notes</div>
+                    <div class="nav-item" data-pane="xplr-notes">XPLR Release Notes</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Agent Store Pane -->
+            <div class="content-pane active agent-store-pane" id="agent-store">
+                <div class="initialization-screen" id="initialization-screen" style="
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    text-align: center;
+                    z-index: 10;
+                ">
+                    <h1 style="
+                        font-size: 48px;
+                        font-weight: 300;
+                        color: #ffffff;
+                        margin-bottom: 16px;
+                        letter-spacing: -1px;
+                    ">PurpleBrain Initializing...</h1>
+                    <p style="
+                        font-size: 18px;
+                        color: rgba(255, 255, 255, 0.7);
+                        margin-bottom: 24px;
+                    ">Your Purple Rain Desktop Environment</p>
+                    <p style="
+                        font-size: 14px;
+                        color: rgba(255, 255, 255, 0.5);
+                        font-style: italic;
+                    ">"Dearly beloved, we are gathered here today to get through this thing called life."</p>
+                </div>
+                
+                <div class="agent-store-content" id="agent-store-content" style="display: none;">
+                    <div class="agent-store-header">
+                        <div class="agent-store-title">AI Agents</div>
+                        <div class="agent-store-subtitle">Your collection of specialized AI agents for comprehensive workflows</div>
+                    </div>
+                    
+                    <div class="agent-grid" id="agent-grid">
+                        <!-- Agents will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Content Panes -->
+            <div class="content-pane" id="get-started">
+                <div style="text-align: center; padding: 100px;">
+                    <h2>Welcome to PurpleBrain</h2>
+                    <p>Your Purple Rain AI workspace powered by advanced multi-agent systems.</p>
+                    <p>Navigate to the AI Agents section to begin your creative journey.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent Modal -->
+        <div id="agent-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="modal-content">
+                    <!-- Modal content will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="prince-signature">
+            "Dearly beloved, we are gathered here today to get through this thing called life" - Prince 💜
+        </div>
+    </div>
+
+    <script>
+        // PurpleBrain Client Application
+        const socket = io();
+        let currentAgent = null;
+        
+        // Agent definitions
+        const agentDefinitions = {
+            research: {
+                name: 'Research Agent',
+                persona: 'Nobel Laureate Researcher',
+                description: 'Nobel laureate-level deep research powered by Exa.ai APIs. Leave no stone unturned approach with comprehensive multi-source analysis.',
+                capabilities: ['web_search', 'academic_research', 'fact_verification', 'multi_source_analysis'],
+                icon: `<path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="rgba(184, 134, 11, 0.9)"/>`
+            },
+            factcheck: {
+                name: 'Fact-Check Agent',
+                persona: 'Truth Guardian',
+                description: 'Combat AI hallucinations through rigorous fact-checking. Cross-verify claims with authoritative sources and detect potential biases.',
+                capabilities: ['fact_verification', 'source_validation', 'bias_detection', 'accuracy_scoring'],
+                icon: `<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="rgba(184, 134, 11, 0.9)"/>`
+            },
+            writing: {
+                name: 'Writing Agent',
+                persona: 'Gifted Code-Switcher',
+                description: 'Master wordsmith with linguistic code-switching abilities. NYT & New Yorker caliber writing that adapts to any audience.',
+                capabilities: ['code_switching', 'style_adaptation', 'audience_targeting', 'narrative_crafting'],
+                icon: `<path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="rgba(184, 134, 11, 0.9)"/>`
+            },
+            visionary: {
+                name: 'Visionary Agent',
+                persona: 'Master of Souls in Data',
+                description: 'Artistic visualization master combining Frida Kahlo × Kadir Nelson × Banksy × Basquiat. Creates visualizations with soul that stare back.',
+                capabilities: ['data_visualization', 'artistic_interpretation', 'soul_infusion', 'multi_media_creation'],
+                icon: `<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="rgba(184, 134, 11, 0.9)"/>`
+            },
+            conductor: {
+                name: 'Conductor Agent',
+                persona: 'AI Symphony Conductor',
+                description: 'Orchestrates multi-agent workflows creating beautiful AI symphonies. Coordinates all agents for comprehensive analysis.',
+                capabilities: ['workflow_orchestration', 'agent_coordination', 'task_delegation', 'result_synthesis'],
+                icon: `<path d="M20 6H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-2 4l-8 5-8-5V8l8 5 8-5v2z" fill="rgba(184, 134, 11, 0.9)"/>`
+            }
+        };
+
+        // Socket event handlers
+        socket.on('connect', function() {
+            updateStatus('🟢 Connected to PurpleBrain');
+            console.log('🎵 Connected to PurpleBrain Server');
+        });
+
+        socket.on('disconnect', function() {
+            updateStatus('🔴 Disconnected from PurpleBrain');
+        });
+
+        socket.on('agent_response', function(data) {
+            displayAgentResult(data);
+        });
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Start initialization sequence
+            setTimeout(() => {
+                initializeNavigation();
+                loadAgentCards();
+                initializeModal();
+                
+                // Hide initialization screen and show agent store
+                const initScreen = document.getElementById('initialization-screen');
+                const agentContent = document.getElementById('agent-store-content');
+                
+                initScreen.style.opacity = '0';
+                initScreen.style.transition = 'opacity 1s ease-out';
+                
+                setTimeout(() => {
+                    initScreen.style.display = 'none';
+                    agentContent.style.display = 'block';
+                    agentContent.style.opacity = '0';
+                    agentContent.style.transition = 'opacity 1s ease-in';
+                    
+                    setTimeout(() => {
+                        agentContent.style.opacity = '1';
+                    }, 100);
+                }, 1000);
+                
+                console.log('🎨 PurpleBrain Interface Ready!');
+            }, 3000); // 3 second initialization
+        });
+
+        function updateStatus(message) {
+            document.getElementById('status-indicator').textContent = message;
+        }
+
+        function initializeNavigation() {
+            document.querySelectorAll('.nav-item').forEach(navItem => {
+                navItem.addEventListener('click', function() {
+                    // Remove active class from all nav items
+                    document.querySelectorAll('.nav-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    // Hide all content panes
+                    document.querySelectorAll('.content-pane').forEach(pane => {
+                        pane.classList.remove('active');
+                    });
+                    
+                    // Show the selected pane
+                    const paneId = this.getAttribute('data-pane');
+                    let targetPane = document.getElementById(paneId);
+                    
+                    if (!targetPane) {
+                        // Create placeholder pane
+                        targetPane = document.createElement('div');
+                        targetPane.className = 'content-pane';
+                        targetPane.id = paneId;
+                        targetPane.innerHTML = `
+                            <div style="text-align: center; padding: 100px;">
+                                <h2>${this.textContent}</h2>
+                                <p>This section is under construction. Coming soon! 💜</p>
+                            </div>
+                        `;
+                        document.querySelector('.main-content').appendChild(targetPane);
+                    }
+                    
+                    targetPane.classList.add('active');
+                });
+            });
+        }
+
+        function loadAgentCards() {
+            const agentGrid = document.getElementById('agent-grid');
+            
+            Object.keys(agentDefinitions).forEach(agentKey => {
+                const agent = agentDefinitions[agentKey];
+                const agentCard = createAgentCard(agentKey, agent);
+                agentGrid.appendChild(agentCard);
+            });
+        }
+
+        function createAgentCard(agentKey, agent) {
+            const card = document.createElement('div');
+            card.className = 'agent-card';
+            card.setAttribute('data-agent', agentKey);
+            
+            card.innerHTML = `
+                <div class="agent-status"></div>
+                <div class="agent-card-header">
+                    <svg class="agent-icon" viewBox="0 0 24 24" fill="currentColor">
+                        ${agent.icon}
+                    </svg>
+                    <div>
+                        <div class="agent-name">${agent.name}</div>
+                        <div class="agent-persona">${agent.persona}</div>
+                    </div>
+                </div>
+                <div class="agent-description">${agent.description}</div>
+                <div class="agent-capabilities">
+                    ${agent.capabilities.map(cap => `<span class="capability-tag">${cap.replace('_', ' ')}</span>`).join('')}
+                </div>
+            `;
+            
+            card.addEventListener('click', function() {
+                openAgentModal(agentKey, agent);
+            });
+            
+            return card;
+        }
+
+        function initializeModal() {
+            const modal = document.getElementById('agent-modal');
+            const closeBtn = document.querySelector('.close');
+            
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        function openAgentModal(agentKey, agent) {
+            currentAgent = agentKey;
+            const modal = document.getElementById('agent-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            modalContent.innerHTML = `
+                <h2>${agent.name}</h2>
+                <p><strong>${agent.persona}</strong></p>
+                <p>${agent.description}</p>
+                
+                <h3>Task Input</h3>
+                <textarea id="task-input" class="task-input" placeholder="Enter your task or query for ${agent.name}..."></textarea>
+                
+                <div>
+                    <button class="action-button" onclick="executeAgent('${agentKey}')">Execute Agent</button>
+                    <button class="action-button" onclick="executeWorkflow('${agentKey}')">Full Workflow</button>
+                </div>
+                
+                <div id="result-container" class="result-container" style="display: none;">
+                    <h3>Results</h3>
+                    <div id="result-content"></div>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        async function executeAgent(agentKey) {
+            const taskInput = document.getElementById('task-input').value.trim();
+            if (!taskInput) {
+                alert('Please enter a task or query.');
+                return;
+            }
+
+            const resultContainer = document.getElementById('result-container');
+            const resultContent = document.getElementById('result-content');
+            
+            resultContainer.style.display = 'block';
+            resultContent.innerHTML = '<div class="loading"></div> Processing...';
+
+            try {
+                const response = await fetch(`/api/agent/${agentKey}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: taskInput,
+                        content: taskInput,
+                        style: 'professional',
+                        audience: 'general',
+                        data: { query: taskInput }
+                    })
+                });
+
+                const result = await response.json();
+                displayResult(result);
+            } catch (error) {
+                console.error('Error executing agent:', error);
+                resultContent.innerHTML = `<div style="color: #ff6b6b;">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function executeWorkflow(startingAgent) {
+            const taskInput = document.getElementById('task-input').value.trim();
+            if (!taskInput) {
+                alert('Please enter a task or query.');
+                return;
+            }
+
+            const resultContainer = document.getElementById('result-container');
+            const resultContent = document.getElementById('result-content');
+            
+            resultContainer.style.display = 'block';
+            resultContent.innerHTML = '<div class="loading"></div> Executing full workflow...';
+
+            try {
+                const response = await fetch('/api/agent/conductor', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        workflow: 'full_analysis',
+                        query: taskInput
+                    })
+                });
+
+                const result = await response.json();
+                displayWorkflowResult(result);
+            } catch (error) {
+                console.error('Error executing workflow:', error);
+                resultContent.innerHTML = `<div style="color: #ff6b6b;">Error: ${error.message}</div>`;
+            }
+        }
+
+        function displayResult(result) {
+            const resultContent = document.getElementById('result-content');
+            
+            if (result.success) {
+                const agentResult = result.result;
+                let html = `
+                    <div style="margin-bottom: 16px;">
+                        <strong>Agent:</strong> ${agentResult.agent}<br>
+                        <strong>Timestamp:</strong> ${agentResult.timestamp}
+                    </div>
+                `;
+
+                if (agentResult.synthesis) {
+                    html += `<div style="margin-bottom: 16px;"><strong>Analysis:</strong><br>${agentResult.synthesis}</div>`;
+                }
+
+                if (agentResult.enhanced_content) {
+                    html += `<div style="margin-bottom: 16px;"><strong>Enhanced Content:</strong><br>${agentResult.enhanced_content}</div>`;
+                }
+
+                if (agentResult.verification) {
+                    html += `<div style="margin-bottom: 16px;"><strong>Verification:</strong><br>${JSON.stringify(agentResult.verification, null, 2)}</div>`;
+                }
+
+                if (agentResult.visualization_concept) {
+                    html += `<div style="margin-bottom: 16px;"><strong>Visualization Concept:</strong><br>${JSON.stringify(agentResult.visualization_concept, null, 2)}</div>`;
+                }
+
+                resultContent.innerHTML = html;
+            } else {
+                resultContent.innerHTML = `<div style="color: #ff6b6b;">Error: ${result.error}</div>`;
+            }
+        }
+
+        function displayWorkflowResult(result) {
+            const resultContent = document.getElementById('result-content');
+            
+            if (result.success) {
+                const workflowResult = result.result;
+                let html = `
+                    <div style="margin-bottom: 16px;">
+                        <strong>Conductor Agent:</strong> Multi-Agent Workflow Completed<br>
+                        <strong>Query:</strong> ${workflowResult.query}<br>
+                        <strong>Timestamp:</strong> ${workflowResult.timestamp}
+                    </div>
+                `;
+
+                if (workflowResult.final_synthesis) {
+                    html += `
+                        <div style="margin-bottom: 16px;">
+                            <strong>Final Synthesis:</strong><br>
+                            Overall Rating: ${(workflowResult.final_synthesis.overall_rating * 100).toFixed(1)}%<br>
+                            Research Quality: ${(workflowResult.final_synthesis.research_quality * 100).toFixed(1)}%<br>
+                            Fact Accuracy: ${(workflowResult.final_synthesis.fact_accuracy * 100).toFixed(1)}%<br>
+                            Writing Quality: ${(workflowResult.final_synthesis.writing_quality * 100).toFixed(1)}%<br>
+                            Visualization Soul: ${(workflowResult.final_synthesis.visualization_soul * 100).toFixed(1)}%
+                        </div>
+                    `;
+                }
+
+                // Show results from each agent
+                Object.keys(workflowResult.agent_results || {}).forEach(agentName => {
+                    const agentResult = workflowResult.agent_results[agentName];
+                    html += `
+                        <details style="margin-bottom: 12px;">
+                            <summary style="cursor: pointer; font-weight: bold; color: var(--text-accent);">
+                                ${agentName.charAt(0).toUpperCase() + agentName.slice(1)} Agent Results
+                            </summary>
+                            <div style="padding: 12px; background: rgba(15, 10, 26, 0.3); border-radius: 6px; margin-top: 8px;">
+                                <pre style="white-space: pre-wrap; font-size: 12px;">${JSON.stringify(agentResult, null, 2)}</pre>
+                            </div>
+                        </details>
+                    `;
+                });
+
+                resultContent.innerHTML = html;
+            } else {
+                resultContent.innerHTML = `<div style="color: #ff6b6b;">Error: ${result.error}</div>`;
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('agent-modal').style.display = 'none';
+            }
+        });
+
+        console.log('🎵 PurpleBrain Client Loaded');
+        console.log('💜 Where AI Agents Dance Like Purple Rain');
+    </script>
+</body>
+</html>

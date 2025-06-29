@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PurpleBrain - Your Purple Rain Desktop</title>
+    <style>
+        /* PurpleBrain - Prince Purple Rain Album Color Palette */
+        :root {
+            /* Deep Purple Rain Album Colors */
+            --purple-rain-deep: #2D1B69;        /* Deep album purple */
+            --purple-rain-shadow: #1A0E3D;      /* Darker purple shadows */
+            --purple-rain-accent: #4A2C7A;      /* Mid-tone purple */
+            --purple-rain-mist: #6B4C9F;        /* Lighter purple accents */
+
+            /* Album Cover Dark Tones */
+            --album-black: #0F0A1A;              /* Near black from album */
+            --album-charcoal: #1C1429;          /* Dark charcoal purple */
+            --album-midnight: #262038;           /* Midnight purple-gray */
+            --album-shadow: #322947;             /* Shadow purple */
+
+            /* Cream & Light Accents (sparingly used) */
+            --cream-soft: #F4F1E8;               /* Soft cream */
+            --cream-warm: #E8E2D5;               /* Warm cream tone */
+            --cream-muted: #D4CFC4;              /* Muted cream */
+
+            /* Paisley Accent Colors */
+            --paisley-gold: #B8860B;             /* Muted gold for paisley */
+            --paisley-rose: #8B6F7D;             /* Dusty rose */
+            --paisley-sage: #6B7B5F;             /* Sage green */
+
+            /* Interface Essentials */
+            --text-primary: var(--cream-soft);
+            --text-secondary: var(--cream-muted);
+            --text-accent: var(--paisley-gold);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--album-black);
+            color: var(--text-primary);
+            overflow: hidden;
+        }
+
+        .purple-rain-desktop {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background: 
+                radial-gradient(ellipse at 25% 75%, var(--purple-rain-deep) 0%, transparent 60%),
+                radial-gradient(ellipse at 75% 25%, var(--purple-rain-shadow) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 50%, var(--album-charcoal) 0%, transparent 80%),
+                linear-gradient(135deg, var(--album-black) 0%, var(--album-midnight) 100%);
+        }
+
+        .paisley-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cpath d='M100 20c-30 0-50 20-50 50 0 20 10 30 30 40-20 10-30 20-30 40 0 30 20 50 50 50s50-20 50-50c0-20-10-30-30-40 20-10 30-20 30-40 0-30-20-50-50-50z' fill='%23B8860B' opacity='0.03'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cpath d='M75 15c-22 0-37 15-37 37 0 15 7 22 22 30-15 7-22 15-22 30 0 22 15 37 37 37s37-15 37-37c0-15-7-22-22-30 15-7 22-15 22-30 0-22-15-37-37-37z' fill='%238B6F7D' opacity='0.025'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M60 12c-18 0-30 12-30 30 0 12 6 18 18 24-12 6-18 12-18 24 0 18 12 30 30 30s30-12 30-30c0-12-6-18-18-24 12-6 18-12 18-24 0-18-12-30-30-30z' fill='%236B7B5F' opacity='0.02'/%3E%3C/svg%3E");
+            background-size: 200px 200px, 150px 150px, 120px 120px;
+            background-position: 0 0, 75px 75px, 150px 150px;
+            animation: paisley-flow 45s infinite linear;
+            pointer-events: none;
+        }
+
+        .mirror-surface {
+            background: rgba(244, 241, 232, 0.02);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(244, 241, 232, 0.08);
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .mirror-surface::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(244, 241, 232, 0.04) 0%,
+                transparent 50%,
+                rgba(184, 134, 11, 0.02) 100%
+            );
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        .sidebar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(15, 10, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(244, 241, 232, 0.1);
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(244, 241, 232, 0.08);
+        }
+
+        .sidebar-logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-accent);
+            margin-bottom: 8px;
+        }
+
+        .sidebar-subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        .sidebar-nav {
+            padding: 16px 0;
+        }
+
+        .nav-section {
+            margin-bottom: 8px;
+        }
+
+        .nav-section-header {
+            padding: 12px 20px 8px 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+        }
+
+        .nav-item {
+            padding: 10px 20px;
+            color: var(--text-primary);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: rgba(244, 241, 232, 0.05);
+            border-left-color: var(--text-accent);
+        }
+
+        .nav-item.active {
+            background: rgba(184, 134, 11, 0.1);
+            border-left-color: var(--text-accent);
+            color: var(--text-accent);
+        }
+
+        .nav-subitem {
+            padding: 8px 20px 8px 40px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-subitem:hover {
+            background: rgba(244, 241, 232, 0.03);
+            color: var(--text-primary);
+        }
+
+        .main-content {
+            position: absolute;
+            left: 280px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+
+        .content-pane {
+            display: none;
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .content-pane.active {
+            display: block;
+        }
+
+        .agent-store-pane {
+            padding: 40px;
+        }
+
+        .agent-store-header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .agent-store-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-accent);
+            margin-bottom: 8px;
+        }
+
+        .agent-store-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            opacity: 0.8;
+        }
+
+        .agent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .agent-card {
+            width: 100%;
+            height: 90px;
+            margin: 16px 0;
+            padding: 20px 24px;
+            background: rgba(28, 20, 41, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(244, 241, 232, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 4px 20px rgba(45, 27, 105, 0.15),
+                inset 0 1px 0 rgba(244, 241, 232, 0.04);
+        }
+
+        .agent-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                transparent, 
+                rgba(184, 134, 11, 0.06), 
+                transparent
+            );
+            transition: left 0.8s ease;
+        }
+
+        .agent-card:hover::before {
+            left: 100%;
+        }
+
+        .agent-card:hover {
+            transform: translateY(-3px);
+            background: rgba(38, 32, 56, 0.85);
+            border-color: rgba(244, 241, 232, 0.18);
+            box-shadow: 
+                0 8px 30px rgba(45, 27, 105, 0.25),
+                0 2px 8px rgba(184, 134, 11, 0.08),
+                inset 0 1px 0 rgba(244, 241, 232, 0.06);
+        }
+
+        .agent-card:active {
+            transform: translateY(-1px);
+            transition: all 0.1s ease;
+        }
+
+        .agent-card-content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .agent-icon {
+            width: 24px;
+            height: 24px;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 8px rgba(184, 134, 11, 0.4));
+        }
+
+        .agent-card:hover .agent-icon {
+            opacity: 1;
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 12px rgba(184, 134, 11, 0.6));
+        }
+
+        .agent-info {
+            flex: 1;
+        }
+
+        .agent-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 3px;
+            opacity: 0.95;
+            letter-spacing: 0.5px;
+        }
+
+        .agent-description {
+            font-size: 11px;
+            color: var(--text-secondary);
+            opacity: 0.8;
+            line-height: 1.2;
+            font-weight: 400;
+        }
+
+        .workspace-canvas {
+            position: absolute;
+            right: 50px;
+            top: 50px;
+            bottom: 50px;
+            left: 400px;
+            border-radius: 25px;
+            background: rgba(15, 10, 26, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(244, 241, 232, 0.08);
+        }
+
+        .prince-signature {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            opacity: 0.6;
+            font-style: italic;
+        }
+
+        @keyframes paisley-flow {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1); }
+            75% { transform: rotate(270deg) scale(0.9); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes mirror-pulse {
+            0% { box-shadow: 0 0 20px rgba(45, 27, 105, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(184, 134, 11, 0.3); }
+            100% { box-shadow: 0 0 20px rgba(45, 27, 105, 0.2); }
+        }
+
+        .loading-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: var(--text-primary);
+            text-align: center;
+            animation: mirror-pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="purple-rain-desktop">
+        <!-- Paisley Pattern Overlay -->
+        <div class="paisley-pattern"></div>
+        
+        <!-- ZBrain-style Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">PurpleBrain</div>
+                <div class="sidebar-subtitle">Your Purple Rain AI Workspace</div>
+            </div>
+            
+            <div class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-header">PurpleBrain Builder</div>
+                    <div class="nav-item" data-pane="get-started">Get Started</div>
+                    <div class="nav-item" data-pane="components">Components</div>
+                    <div class="nav-item" data-pane="knowledge-base">Knowledge Base</div>
+                    <div class="nav-item" data-pane="app">App</div>
+                    <div class="nav-item active" data-pane="agent-store">AI Agents</div>
+                    <div class="nav-item" data-pane="prompts">Prompts</div>
+                    <div class="nav-item" data-pane="monitor">Monitor</div>
+                    <div class="nav-item" data-pane="security">Security Features</div>
+                    <div class="nav-item" data-pane="settings">Settings</div>
+                    <div class="nav-item" data-pane="api">API Tutorials</div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-header">PurpleBrain XPLR</div>
+                    <div class="nav-item" data-pane="xplr-modules">XPLR Modules</div>
+                    <div class="nav-item" data-pane="simulation">Simulation XPLR</div>
+                    <div class="nav-item" data-pane="taxonomy">Taxonomy XPLR</div>
+                    <div class="nav-item" data-pane="solution">Solution XPLR</div>
+                    <div class="nav-item" data-pane="portfolio">Portfolio XPLR</div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-header">Release Notes</div>
+                    <div class="nav-item" data-pane="builder-notes">Builder Release Notes</div>
+                    <div class="nav-item" data-pane="xplr-notes">XPLR Release Notes</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Agent Store Pane -->
+            <div class="content-pane active agent-store-pane" id="agent-store">
+                <div class="agent-store-header">
+                    <div class="agent-store-title">AI Agents</div>
+                    <div class="agent-store-subtitle">Your collection of specialized AI agents for comprehensive workflows</div>
+                </div>
+                
+                <div class="agent-grid">
+                    <div class="agent-card" id="research-agent">
+                        <div class="agent-card-content">
+                            <svg class="agent-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="rgba(184, 134, 11, 0.9)"/>
+                            </svg>
+                            <div class="agent-info">
+                                <div class="agent-name">Research Agent</div>
+                                <div class="agent-description">Nobel laureate-level deep research</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-card" id="factcheck-agent">
+                        <div class="agent-card-content">
+                            <svg class="agent-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="rgba(184, 134, 11, 0.9)"/>
+                            </svg>
+                            <div class="agent-info">
+                                <div class="agent-name">Fact-Check Agent</div>
+                                <div class="agent-description">Truth guardian, combat hallucinations</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-card" id="writing-agent">
+                        <div class="agent-card-content">
+                            <svg class="agent-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="rgba(184, 134, 11, 0.9)"/>
+                            </svg>
+                            <div class="agent-info">
+                                <div class="agent-name">Writing Agent</div>
+                                <div class="agent-description">Gifted code-switcher, NYT caliber</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-card" id="visionary-agent">
+                        <div class="agent-card-content">
+                            <svg class="agent-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="rgba(184, 134, 11, 0.9)"/>
+                            </svg>
+                            <div class="agent-info">
+                                <div class="agent-name">Visionary Agent</div>
+                                <div class="agent-description">Frida × Kadir × Banksy × Basquiat</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-card" id="conductor-agent">
+                        <div class="agent-card-content">
+                            <svg class="agent-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 6H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-2 4l-8 5-8-5V8l8 5 8-5v2z" fill="rgba(184, 134, 11, 0.9)"/>
+                            </svg>
+                            <div class="agent-info">
+                                <div class="agent-name">Conductor Agent</div>
+                                <div class="agent-description">AI symphony orchestration</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Content Panes (Hidden by default) -->
+            <div class="content-pane" id="get-started">
+                <div style="text-align: center; padding: 100px; color: var(--text-primary);">
+                    <h2>Get Started with PurpleBrain</h2>
+                    <p>Welcome to your Purple Rain AI workspace. Navigate through the sidebar to explore different sections.</p>
+                </div>
+            </div>
+            
+            <!-- Add more content panes as needed -->
+        </div>
+
+        <!-- Prince Signature -->
+        <div class="prince-signature">
+            "Dearly beloved, we are gathered here today to get through this thing called life" - Prince 💜
+        </div>
+    </div>
+
+    <script>
+        // PurpleBrain - ZBrain-style Desktop Environment
+        console.log('🎵 PurpleBrain Desktop Environment Loading...');
+        console.log('💜 Honoring Prince - The Purple One');
+        console.log('🧠 Celebrating Neurodivergent Brilliance');
+        console.log('🎭 Where AI Agents Dance Like Purple Rain');
+
+        // Sidebar navigation functionality
+        document.querySelectorAll('.nav-item').forEach(navItem => {
+            navItem.addEventListener('click', () => {
+                // Remove active class from all nav items
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Add active class to clicked item
+                navItem.classList.add('active');
+                
+                // Hide all content panes
+                document.querySelectorAll('.content-pane').forEach(pane => {
+                    pane.classList.remove('active');
+                });
+                
+                // Show the selected pane
+                const paneId = navItem.getAttribute('data-pane');
+                const targetPane = document.getElementById(paneId);
+                if (targetPane) {
+                    targetPane.classList.add('active');
+                } else {
+                    // Create a placeholder pane if it doesn't exist
+                    const placeholderPane = document.createElement('div');
+                    placeholderPane.className = 'content-pane active';
+                    placeholderPane.id = paneId;
+                    placeholderPane.innerHTML = `
+                        <div style="text-align: center; padding: 100px; color: var(--text-primary);">
+                            <h2>${navItem.textContent}</h2>
+                            <p>This section is under construction. Coming soon to your Purple Rain workspace! 💜</p>
+                        </div>
+                    `;
+                    document.querySelector('.main-content').appendChild(placeholderPane);
+                }
+                
+                console.log(`📱 Navigated to: ${navItem.textContent}`);
+            });
+        });
+
+        // Agent card interactions
+        document.querySelectorAll('.agent-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const agentName = card.querySelector('.agent-name').textContent;
+                const agentDesc = card.querySelector('.agent-description').textContent;
+                
+                // Create agent detail modal or expand functionality
+                const agentDetail = document.createElement('div');
+                agentDetail.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(28, 20, 41, 0.95);
+                    backdrop-filter: blur(20px);
+                    border: 1px solid rgba(244, 241, 232, 0.2);
+                    border-radius: 20px;
+                    padding: 40px;
+                    max-width: 500px;
+                    text-align: center;
+                    z-index: 1000;
+                    box-shadow: 0 20px 60px rgba(45, 27, 105, 0.3);
+                `;
+                
+                agentDetail.innerHTML = `
+                    <div style="font-size: 24px; margin-bottom: 15px; color: var(--text-primary);">${agentName}</div>
+                    <div style="font-size: 14px; margin-bottom: 25px; color: var(--text-secondary);">${agentDesc}</div>
+                    <div style="font-size: 16px; margin-bottom: 20px; color: var(--text-accent);">Agent Activated!</div>
+                    <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 30px;">
+                        Ready to serve your creative needs...
+                    </div>
+                    <button onclick="this.parentElement.remove()" style="
+                        background: linear-gradient(45deg, var(--purple-rain-accent), var(--purple-rain-mist));
+                        color: var(--text-primary);
+                        border: none;
+                        padding: 12px 24px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-size: 14px;
+                        transition: all 0.3s ease;
+                    ">Close</button>
+                `;
+                
+                document.body.appendChild(agentDetail);
+                
+                console.log(`🎭 ${agentName} activated!`);
+            });
+        });
+
+        // Welcome message after short delay
+        setTimeout(() => {
+            console.log('🎨 PurpleBrain Desktop Environment Ready!');
+        }, 1000);
+    </script>
+</body>
+</html>
