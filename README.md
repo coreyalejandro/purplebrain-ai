@@ -29,7 +29,7 @@ A multi-agent AI orchestration platform inspired by Prince's Purple Rain album, 
    ```
 
 4. **Open Your Workspace**:
-   Navigate to `http://localhost:5000`
+   Navigate to `http://localhost:8000`
 
 ## 🤖 AI Agents
 
@@ -72,7 +72,7 @@ This platform celebrates neurodivergent thinking patterns through:
 
 ### Activate Individual Agents
 ```bash
-curl -X POST http://localhost:5000/api/agent/research \
+curl -X POST http://localhost:8000/api/agent/research \
   -H "Content-Type: application/json" \
   -d '{"query": "artificial intelligence trends 2024"}'
 ```

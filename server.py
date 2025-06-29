@@ -5,14 +5,12 @@ Built with Flask and Socket.IO for real-time agent communication
 """
 
 import os
-import json
 import asyncio
 import logging
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, jsonify
 from flask_socketio import SocketIO, emit
 from flask_cors import CORS
-import requests
 from dotenv import load_dotenv
 import openai
 
@@ -443,7 +441,7 @@ class ConductorAgent(PurpleBrainAgent):
     async def _synthesize_workflow_results(self, results):
         """Synthesize results from all agents into cohesive output"""
         return {
-            'comprehensive_analysis': f"Multi-agent analysis completed successfully",
+            'comprehensive_analysis': "Multi-agent analysis completed successfully",
             'research_quality': results.get('research', {}).get('confidence_score', 0),
             'fact_accuracy': results.get('factcheck', {}).get('overall_accuracy', 0),
             'writing_quality': results.get('writing', {}).get('style_analysis', {}).get('target_style_adherence', 0),
@@ -550,7 +548,7 @@ if __name__ == '__main__':
     logger.info("💜 Your Purple Rain AI Workspace")
     
     # Get port from environment or use default
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 8000))
     
     # Run the server
     socketio.run(app, 
