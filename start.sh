@@ -35,7 +35,7 @@ fi
 
 echo ""
 echo "🚀 Launching PurpleBrain Server..."
-echo "🌐 Open http://localhost:5000 in your browser"
+echo "🌐 Open http://localhost:8000 in your browser"
 echo ""
 
 # Start the server

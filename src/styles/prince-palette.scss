@@ -1,8 +1,18 @@
 // PurpleBrain - Prince Purple Rain Color Palette
-// Honoring the Purple One's aesthetic legacy
+// Honoring the Purple One's aesthetic legacy + Neural Network Brain Theme
 
 :root {
-  // Primary Purple Rain Colors
+  // Neural Network Brain Colors (from the beautiful brain image)
+  --neural-purple-bright: #9333EA;      // Bright purple nodes
+  --neural-purple-deep: #7C3AED;        // Deep purple connections
+  --neural-blue-bright: #3B82F6;        // Bright blue nodes
+  --neural-blue-deep: #1D4ED8;          // Deep blue connections
+  --neural-pink-bright: #EC4899;        // Pink connection highlights
+  --neural-cyan-bright: #06B6D4;        // Cyan node highlights
+  --neural-background: #0B0014;          // Deep space background
+  --neural-fade: #1A0B2E;               // Gradient fade color
+
+  // Primary Purple Rain Colors (Enhanced)
   --purple-royal: #800080;           // Prince's signature royal purple
   --purple-deep: #4B0082;            // Indigo depth
   --purple-soft: #9370DB;            // Medium slate blue
@@ -35,10 +45,56 @@
     transparent 100%);
 
   // Paisley Pattern Colors (Neurodivergent Brain)
-  --paisley-primary: var(--purple-royal);
-  --paisley-secondary: var(--gold-rich);
-  --paisley-accent: var(--purple-soft);
-  --paisley-flow: var(--smoke-medium);
+  --paisley-primary: var(--neural-purple-bright);
+  --paisley-secondary: var(--neural-blue-bright);
+  --paisley-accent: var(--neural-pink-bright);
+  --paisley-flow: var(--neural-cyan-bright);
+}
+
+// Neural Network Brain Background
+@mixin neural-network-background {
+  background: 
+    // Main brain background
+    radial-gradient(ellipse 800px 600px at 50% 50%, 
+      var(--neural-purple-deep) 0%,
+      var(--neural-blue-deep) 30%,
+      var(--neural-background) 70%,
+      var(--black-velvet) 100%),
+    
+    // Neural connection lines
+    linear-gradient(45deg, transparent 48%, var(--neural-purple-bright) 49%, var(--neural-purple-bright) 51%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, var(--neural-blue-bright) 49%, var(--neural-blue-bright) 51%, transparent 52%),
+    linear-gradient(135deg, transparent 48%, var(--neural-pink-bright) 49%, var(--neural-pink-bright) 51%, transparent 52%),
+    
+    // Neural nodes (bright spots)
+    radial-gradient(circle at 15% 25%, var(--neural-purple-bright) 2px, transparent 3px),
+    radial-gradient(circle at 85% 20%, var(--neural-blue-bright) 2px, transparent 3px),
+    radial-gradient(circle at 70% 60%, var(--neural-pink-bright) 2px, transparent 3px),
+    radial-gradient(circle at 25% 75%, var(--neural-cyan-bright) 2px, transparent 3px),
+    radial-gradient(circle at 60% 30%, var(--neural-purple-bright) 1px, transparent 2px),
+    radial-gradient(circle at 40% 80%, var(--neural-blue-bright) 1px, transparent 2px),
+    
+    // Subtle texture overlay
+    radial-gradient(ellipse at 30% 70%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+    
+  background-size: 
+    100% 100%,
+    60px 60px, 80px 80px, 70px 70px,
+    120px 120px, 150px 150px, 100px 100px, 180px 180px, 90px 90px, 110px 110px,
+    300px 300px, 350px 350px;
+    
+  background-position: 
+    center center,
+    0 0, 30px 30px, 15px 45px,
+    0 0, 40px 40px, 80px 20px, 120px 60px, 200px 100px, 160px 140px,
+    0 0, 200px 200px;
+}
+
+// Animated Neural Network Background
+@mixin animated-neural-background {
+  @include neural-network-background;
+  animation: neural-pulse 8s ease-in-out infinite, connection-flow 12s linear infinite;
 }
 
 // Mirror Effect Mixins
@@ -62,29 +118,85 @@
   background-image: 
     radial-gradient(ellipse at 20% 80%, var(--paisley-primary) 0%, transparent 50%),
     radial-gradient(ellipse at 80% 20%, var(--paisley-secondary) 0%, transparent 50%),
-    radial-gradient(ellipse at 40% 40%, var(--paisley-accent) 0%, transparent 50%);
-  background-size: 200px 200px, 150px 150px, 100px 100px;
-  background-position: 0 0, 50px 50px, 100px 100px;
+    radial-gradient(ellipse at 40% 40%, var(--paisley-accent) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 60%, var(--paisley-flow) 0%, transparent 50%);
+  background-size: 200px 200px, 150px 150px, 100px 100px, 180px 180px;
+  background-position: 0 0, 50px 50px, 100px 100px, 150px 25px;
   opacity: $opacity;
 }
 
 // Theatrical Lighting
 @mixin stage-lighting {
   box-shadow: 
-    0 0 20px rgba(var(--purple-royal), 0.3),
+    0 0 20px rgba(147, 51, 234, 0.3),
+    0 0 40px rgba(59, 130, 246, 0.2),
     inset 0 1px 0 var(--mirror-shine),
     inset 0 -1px 0 var(--mirror-shadow);
 }
 
-// Neurodivergent Flow Animation
+// Neural Network Animations
+@keyframes neural-pulse {
+  0%, 100% { 
+    filter: brightness(1) contrast(1) hue-rotate(0deg);
+  }
+  25% { 
+    filter: brightness(1.1) contrast(1.1) hue-rotate(5deg);
+  }
+  50% { 
+    filter: brightness(1.2) contrast(1.2) hue-rotate(10deg);
+  }
+  75% { 
+    filter: brightness(1.1) contrast(1.1) hue-rotate(5deg);
+  }
+}
+
+@keyframes connection-flow {
+  0% { 
+    background-position: 
+      center center,
+      0 0, 30px 30px, 15px 45px,
+      0 0, 40px 40px, 80px 20px, 120px 60px, 200px 100px, 160px 140px,
+      0 0, 200px 200px;
+  }
+  100% { 
+    background-position: 
+      center center,
+      60px 60px, 90px 90px, 75px 105px,
+      120px 120px, 190px 190px, 200px 140px, 240px 180px, 320px 220px, 280px 260px,
+      300px 300px, 550px 550px;
+  }
+}
+
+// Neurodivergent Flow Animation (Enhanced)
 @keyframes paisley-flow {
-  0% { transform: rotate(0deg) scale(1); }
-  25% { transform: rotate(90deg) scale(1.1); }
-  50% { transform: rotate(180deg) scale(1); }
-  75% { transform: rotate(270deg) scale(0.9); }
-  100% { transform: rotate(360deg) scale(1); }
+  0% { transform: rotate(0deg) scale(1); opacity: 0.8; }
+  25% { transform: rotate(90deg) scale(1.1); opacity: 1; }
+  50% { transform: rotate(180deg) scale(1); opacity: 0.9; }
+  75% { transform: rotate(270deg) scale(0.9); opacity: 1; }
+  100% { transform: rotate(360deg) scale(1); opacity: 0.8; }
 }
 
 @mixin neural-flow {
-  animation: paisley-flow 20s infinite ease-in-out;
+  animation: paisley-flow 25s infinite ease-in-out, neural-pulse 8s infinite ease-in-out;
+}
+
+// Neural Brain Body Background
+body.neural-brain-bg {
+  @include animated-neural-background;
+  min-height: 100vh;
+  color: var(--white-stage);
+}
+
+// Container with neural background
+.neural-container {
+  @include neural-network-background;
+  border-radius: 12px;
+  @include stage-lighting;
+}
+
+// Animated neural container
+.neural-container-animated {
+  @include animated-neural-background;
+  border-radius: 12px;
+  @include stage-lighting;
 }

@@ -44,21 +44,64 @@
 
         body {
             font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #000000;
+            background: #0B0014;
             color: var(--text-primary);
             overflow: hidden;
             height: 100vh;
+            margin: 0;
+            padding: 0;
         }
 
         .purple-rain-desktop {
             width: 100vw;
             height: 100vh;
             position: relative;
+            /* Neural Network Brain Background */
             background: 
-                radial-gradient(ellipse at 70% 40%, rgba(147, 51, 234, 0.4) 0%, transparent 50%),
-                radial-gradient(ellipse at 30% 60%, rgba(79, 70, 229, 0.3) 0%, transparent 40%),
-                radial-gradient(ellipse at 50% 20%, rgba(219, 39, 119, 0.2) 0%, transparent 60%),
-                linear-gradient(135deg, #000000 0%, #0f0f23 50%, #1a0b2e 100%);
+                /* Main brain gradient */
+                radial-gradient(ellipse 1200px 800px at 50% 50%, 
+                    #7C3AED 0%,
+                    #1D4ED8 25%,
+                    #0B0014 60%,
+                    #000000 100%),
+                
+                /* Neural connection lines */
+                linear-gradient(45deg, transparent 48%, #9333EA 49%, #9333EA 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #3B82F6 49%, #3B82F6 51%, transparent 52%),
+                linear-gradient(135deg, transparent 48%, #EC4899 49%, #EC4899 51%, transparent 52%),
+                linear-gradient(0deg, transparent 48%, #06B6D4 49%, #06B6D4 51%, transparent 52%),
+                
+                /* Neural nodes (bright connection points) */
+                radial-gradient(circle at 15% 25%, #9333EA 3px, transparent 4px),
+                radial-gradient(circle at 85% 20%, #3B82F6 3px, transparent 4px),
+                radial-gradient(circle at 70% 60%, #EC4899 2px, transparent 3px),
+                radial-gradient(circle at 25% 75%, #06B6D4 2px, transparent 3px),
+                radial-gradient(circle at 60% 30%, #9333EA 2px, transparent 3px),
+                radial-gradient(circle at 40% 80%, #3B82F6 1px, transparent 2px),
+                radial-gradient(circle at 80% 70%, #EC4899 2px, transparent 3px),
+                radial-gradient(circle at 30% 40%, #06B6D4 1px, transparent 2px),
+                radial-gradient(circle at 50% 10%, #9333EA 1px, transparent 2px),
+                radial-gradient(circle at 10% 60%, #3B82F6 2px, transparent 3px),
+                radial-gradient(circle at 90% 45%, #EC4899 1px, transparent 2px),
+                radial-gradient(circle at 20% 90%, #06B6D4 2px, transparent 3px),
+                
+                /* Additional subtle texture */
+                radial-gradient(ellipse at 30% 70%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+                
+            background-size: 
+                100% 100%,
+                80px 80px, 100px 100px, 90px 90px, 70px 70px,
+                150px 150px, 180px 180px, 120px 120px, 200px 200px, 110px 110px, 140px 140px, 160px 160px, 130px 130px, 170px 170px, 190px 190px, 210px 210px, 220px 220px,
+                400px 400px, 450px 450px;
+                
+            background-position: 
+                center center,
+                0 0, 40px 40px, 20px 60px, 60px 20px,
+                0 0, 50px 50px, 100px 30px, 150px 80px, 250px 120px, 200px 160px, 300px 40px, 180px 200px, 320px 140px, 80px 180px, 380px 60px, 120px 240px,
+                0 0, 250px 250px;
+            
+            animation: neural-pulse 12s ease-in-out infinite, connection-flow 20s linear infinite;
         }
 
         .neural-brain {
@@ -160,6 +203,7 @@
             width: 280px;
             height: 100vh;
             background: rgba(15, 10, 26, 0.95);
+            -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
             border-right: 1px solid rgba(244, 241, 232, 0.1);
             overflow-y: auto;
@@ -272,6 +316,7 @@
 
         .agent-card {
             background: rgba(28, 20, 41, 0.7);
+            -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(244, 241, 232, 0.1);
             border-radius: 12px;
@@ -397,11 +442,17 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
+            -webkit-backdrop-filter: blur(5px);
             backdrop-filter: blur(5px);
+        }
+
+        .modal.modal-visible {
+            display: block;
         }
 
         .modal-content {
             background: rgba(28, 20, 41, 0.95);
+            -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(244, 241, 232, 0.2);
             border-radius: 20px;
@@ -499,6 +550,39 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Neural Network Animations */
+        @keyframes neural-pulse {
+            0%, 100% { 
+                filter: brightness(1) contrast(1) hue-rotate(0deg);
+            }
+            25% { 
+                filter: brightness(1.1) contrast(1.1) hue-rotate(5deg);
+            }
+            50% { 
+                filter: brightness(1.2) contrast(1.2) hue-rotate(10deg);
+            }
+            75% { 
+                filter: brightness(1.1) contrast(1.1) hue-rotate(5deg);
+            }
+        }
+
+        @keyframes connection-flow {
+            0% { 
+                background-position: 
+                    center center,
+                    0 0, 40px 40px, 20px 60px, 60px 20px,
+                    0 0, 50px 50px, 100px 30px, 150px 80px, 250px 120px, 200px 160px, 300px 40px, 180px 200px, 320px 140px, 80px 180px, 380px 60px, 120px 240px,
+                    0 0, 250px 250px;
+            }
+            100% { 
+                background-position: 
+                    center center,
+                    80px 80px, 120px 120px, 110px 150px, 140px 100px,
+                    150px 150px, 230px 230px, 280px 210px, 330px 260px, 430px 300px, 380px 340px, 480px 220px, 360px 380px, 500px 320px, 260px 360px, 560px 240px, 300px 420px,
+                    400px 400px, 700px 700px;
+            }
+        }
+
         .prince-signature {
             position: absolute;
             bottom: 20px;
@@ -507,6 +591,84 @@
             color: var(--text-secondary);
             opacity: 0.5;
             font-style: italic;
+        }
+
+        /* Initialization Screen Styles */
+        .initialization-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .initialization-title {
+            font-size: 48px;
+            font-weight: 300;
+            color: #ffffff;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .initialization-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 24px;
+        }
+
+        .initialization-quote {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+        }
+
+        .agent-store-content {
+            display: none;
+        }
+
+        .placeholder-content {
+            text-align: center;
+            padding: 100px;
+        }
+
+        /* Result and content display styles */
+        .error-message {
+            color: #ff6b6b;
+        }
+
+        .result-section {
+            margin-bottom: 16px;
+        }
+
+        .result-details {
+            margin-bottom: 12px;
+        }
+
+        .result-summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--text-accent);
+        }
+
+        .result-details-content {
+            padding: 12px;
+            background: rgba(15, 10, 26, 0.3);
+            border-radius: 6px;
+            margin-top: 8px;
+        }
+
+        .result-pre {
+            white-space: pre-wrap;
+            font-size: 12px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .modal-visible {
+            display: block;
         }
 
         .status-indicator {
@@ -580,34 +742,13 @@
         <div class="main-content">
             <!-- Agent Store Pane -->
             <div class="content-pane active agent-store-pane" id="agent-store">
-                <div class="initialization-screen" id="initialization-screen" style="
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    text-align: center;
-                    z-index: 10;
-                ">
-                    <h1 style="
-                        font-size: 48px;
-                        font-weight: 300;
-                        color: #ffffff;
-                        margin-bottom: 16px;
-                        letter-spacing: -1px;
-                    ">PurpleBrain Initializing...</h1>
-                    <p style="
-                        font-size: 18px;
-                        color: rgba(255, 255, 255, 0.7);
-                        margin-bottom: 24px;
-                    ">Your Purple Rain Desktop Environment</p>
-                    <p style="
-                        font-size: 14px;
-                        color: rgba(255, 255, 255, 0.5);
-                        font-style: italic;
-                    ">"Dearly beloved, we are gathered here today to get through this thing called life."</p>
+                <div class="initialization-screen" id="initialization-screen">
+                    <h1 class="initialization-title">PurpleBrain Initializing...</h1>
+                    <p class="initialization-subtitle">Your Purple Rain Desktop Environment</p>
+                    <p class="initialization-quote">"Dearly beloved, we are gathered here today to get through this thing called life."</p>
                 </div>
                 
-                <div class="agent-store-content" id="agent-store-content" style="display: none;">
+                <div class="agent-store-content" id="agent-store-content">
                     <div class="agent-store-header">
                         <div class="agent-store-title">AI Agents</div>
                         <div class="agent-store-subtitle">Your collection of specialized AI agents for comprehensive workflows</div>
@@ -621,7 +762,7 @@
 
             <!-- Other Content Panes -->
             <div class="content-pane" id="get-started">
-                <div style="text-align: center; padding: 100px;">
+                <div class="placeholder-content">
                     <h2>Welcome to PurpleBrain</h2>
                     <p>Your Purple Rain AI workspace powered by advanced multi-agent systems.</p>
                     <p>Navigate to the AI Agents section to begin your creative journey.</p>
@@ -718,8 +859,8 @@
                 initScreen.style.transition = 'opacity 1s ease-out';
                 
                 setTimeout(() => {
-                    initScreen.style.display = 'none';
-                    agentContent.style.display = 'block';
+                    initScreen.classList.add('hidden');
+                    agentContent.classList.remove('agent-store-content');
                     agentContent.style.opacity = '0';
                     agentContent.style.transition = 'opacity 1s ease-in';
                     
@@ -762,7 +903,7 @@
                         targetPane.className = 'content-pane';
                         targetPane.id = paneId;
                         targetPane.innerHTML = `
-                            <div style="text-align: center; padding: 100px;">
+                            <div class="placeholder-content">
                                 <h2>${this.textContent}</h2>
                                 <p>This section is under construction. Coming soon! 💜</p>
                             </div>
@@ -819,12 +960,12 @@
             const closeBtn = document.querySelector('.close');
             
             closeBtn.addEventListener('click', function() {
-                modal.style.display = 'none';
+                modal.classList.remove('modal-visible');
             });
             
             window.addEventListener('click', function(event) {
                 if (event.target === modal) {
-                    modal.style.display = 'none';
+                    modal.classList.remove('modal-visible');
                 }
             });
         }
@@ -847,13 +988,13 @@
                     <button class="action-button" onclick="executeWorkflow('${agentKey}')">Full Workflow</button>
                 </div>
                 
-                <div id="result-container" class="result-container" style="display: none;">
+                <div id="result-container" class="result-container hidden">
                     <h3>Results</h3>
                     <div id="result-content"></div>
                 </div>
             `;
             
-            modal.style.display = 'block';
+            modal.classList.add('modal-visible');
         }
 
         async function executeAgent(agentKey) {
@@ -866,7 +1007,7 @@
             const resultContainer = document.getElementById('result-container');
             const resultContent = document.getElementById('result-content');
             
-            resultContainer.style.display = 'block';
+            resultContainer.classList.remove('hidden');
             resultContent.innerHTML = '<div class="loading"></div> Processing...';
 
             try {
@@ -888,7 +1029,7 @@
                 displayResult(result);
             } catch (error) {
                 console.error('Error executing agent:', error);
-                resultContent.innerHTML = `<div style="color: #ff6b6b;">Error: ${error.message}</div>`;
+                resultContent.innerHTML = `<div class="error-message">Error: ${error.message}</div>`;
             }
         }
 
@@ -902,7 +1043,7 @@
             const resultContainer = document.getElementById('result-container');
             const resultContent = document.getElementById('result-content');
             
-            resultContainer.style.display = 'block';
+            resultContainer.classList.remove('hidden');
             resultContent.innerHTML = '<div class="loading"></div> Executing full workflow...';
 
             try {
@@ -921,7 +1062,7 @@
                 displayWorkflowResult(result);
             } catch (error) {
                 console.error('Error executing workflow:', error);
-                resultContent.innerHTML = `<div style="color: #ff6b6b;">Error: ${error.message}</div>`;
+                resultContent.innerHTML = `<div class="error-message">Error: ${error.message}</div>`;
             }
         }
 
@@ -931,31 +1072,31 @@
             if (result.success) {
                 const agentResult = result.result;
                 let html = `
-                    <div style="margin-bottom: 16px;">
+                    <div class="result-section">
                         <strong>Agent:</strong> ${agentResult.agent}<br>
                         <strong>Timestamp:</strong> ${agentResult.timestamp}
                     </div>
                 `;
 
                 if (agentResult.synthesis) {
-                    html += `<div style="margin-bottom: 16px;"><strong>Analysis:</strong><br>${agentResult.synthesis}</div>`;
+                    html += `<div class="result-section"><strong>Analysis:</strong><br>${agentResult.synthesis}</div>`;
                 }
 
                 if (agentResult.enhanced_content) {
-                    html += `<div style="margin-bottom: 16px;"><strong>Enhanced Content:</strong><br>${agentResult.enhanced_content}</div>`;
+                    html += `<div class="result-section"><strong>Enhanced Content:</strong><br>${agentResult.enhanced_content}</div>`;
                 }
 
                 if (agentResult.verification) {
-                    html += `<div style="margin-bottom: 16px;"><strong>Verification:</strong><br>${JSON.stringify(agentResult.verification, null, 2)}</div>`;
+                    html += `<div class="result-section"><strong>Verification:</strong><br>${JSON.stringify(agentResult.verification, null, 2)}</div>`;
                 }
 
                 if (agentResult.visualization_concept) {
-                    html += `<div style="margin-bottom: 16px;"><strong>Visualization Concept:</strong><br>${JSON.stringify(agentResult.visualization_concept, null, 2)}</div>`;
+                    html += `<div class="result-section"><strong>Visualization Concept:</strong><br>${JSON.stringify(agentResult.visualization_concept, null, 2)}</div>`;
                 }
 
                 resultContent.innerHTML = html;
             } else {
-                resultContent.innerHTML = `<div style="color: #ff6b6b;">Error: ${result.error}</div>`;
+                resultContent.innerHTML = `<div class="error-message">Error: ${result.error}</div>`;
             }
         }
 
@@ -965,7 +1106,7 @@
             if (result.success) {
                 const workflowResult = result.result;
                 let html = `
-                    <div style="margin-bottom: 16px;">
+                    <div class="result-section">
                         <strong>Conductor Agent:</strong> Multi-Agent Workflow Completed<br>
                         <strong>Query:</strong> ${workflowResult.query}<br>
                         <strong>Timestamp:</strong> ${workflowResult.timestamp}
@@ -974,7 +1115,7 @@
 
                 if (workflowResult.final_synthesis) {
                     html += `
-                        <div style="margin-bottom: 16px;">
+                        <div class="result-section">
                             <strong>Final Synthesis:</strong><br>
                             Overall Rating: ${(workflowResult.final_synthesis.overall_rating * 100).toFixed(1)}%<br>
                             Research Quality: ${(workflowResult.final_synthesis.research_quality * 100).toFixed(1)}%<br>
@@ -989,12 +1130,12 @@
                 Object.keys(workflowResult.agent_results || {}).forEach(agentName => {
                     const agentResult = workflowResult.agent_results[agentName];
                     html += `
-                        <details style="margin-bottom: 12px;">
-                            <summary style="cursor: pointer; font-weight: bold; color: var(--text-accent);">
+                        <details class="result-details">
+                            <summary class="result-summary">
                                 ${agentName.charAt(0).toUpperCase() + agentName.slice(1)} Agent Results
                             </summary>
-                            <div style="padding: 12px; background: rgba(15, 10, 26, 0.3); border-radius: 6px; margin-top: 8px;">
-                                <pre style="white-space: pre-wrap; font-size: 12px;">${JSON.stringify(agentResult, null, 2)}</pre>
+                            <div class="result-details-content">
+                                <pre class="result-pre">${JSON.stringify(agentResult, null, 2)}</pre>
                             </div>
                         </details>
                     `;
@@ -1002,14 +1143,14 @@
 
                 resultContent.innerHTML = html;
             } else {
-                resultContent.innerHTML = `<div style="color: #ff6b6b;">Error: ${result.error}</div>`;
+                resultContent.innerHTML = `<div class="error-message">Error: ${result.error}</div>`;
             }
         }
 
         // Keyboard shortcuts
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                document.getElementById('agent-modal').style.display = 'none';
+                document.getElementById('agent-modal').classList.remove('modal-visible');
             }
         });
 

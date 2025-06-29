@@ -39,7 +39,7 @@
             margin: 0;
             padding: 0;
             font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--album-black);
+            background: #0B0014;
             color: var(--text-primary);
             overflow: hidden;
         }
@@ -48,11 +48,52 @@
             width: 100vw;
             height: 100vh;
             position: relative;
+            /* Neural Network Brain Background */
             background: 
-                radial-gradient(ellipse at 25% 75%, var(--purple-rain-deep) 0%, transparent 60%),
-                radial-gradient(ellipse at 75% 25%, var(--purple-rain-shadow) 0%, transparent 55%),
-                radial-gradient(ellipse at 50% 50%, var(--album-charcoal) 0%, transparent 80%),
-                linear-gradient(135deg, var(--album-black) 0%, var(--album-midnight) 100%);
+                /* Main brain gradient */
+                radial-gradient(ellipse 1200px 800px at 50% 50%, 
+                    #7C3AED 0%,
+                    #1D4ED8 25%,
+                    #0B0014 60%,
+                    #000000 100%),
+                
+                /* Neural connection lines */
+                linear-gradient(45deg, transparent 48%, #9333EA 49%, #9333EA 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #3B82F6 49%, #3B82F6 51%, transparent 52%),
+                linear-gradient(135deg, transparent 48%, #EC4899 49%, #EC4899 51%, transparent 52%),
+                linear-gradient(0deg, transparent 48%, #06B6D4 49%, #06B6D4 51%, transparent 52%),
+                
+                /* Neural nodes (bright connection points) */
+                radial-gradient(circle at 15% 25%, #9333EA 3px, transparent 4px),
+                radial-gradient(circle at 85% 20%, #3B82F6 3px, transparent 4px),
+                radial-gradient(circle at 70% 60%, #EC4899 2px, transparent 3px),
+                radial-gradient(circle at 25% 75%, #06B6D4 2px, transparent 3px),
+                radial-gradient(circle at 60% 30%, #9333EA 2px, transparent 3px),
+                radial-gradient(circle at 40% 80%, #3B82F6 1px, transparent 2px),
+                radial-gradient(circle at 80% 70%, #EC4899 2px, transparent 3px),
+                radial-gradient(circle at 30% 40%, #06B6D4 1px, transparent 2px),
+                radial-gradient(circle at 50% 10%, #9333EA 1px, transparent 2px),
+                radial-gradient(circle at 10% 60%, #3B82F6 2px, transparent 3px),
+                radial-gradient(circle at 90% 45%, #EC4899 1px, transparent 2px),
+                radial-gradient(circle at 20% 90%, #06B6D4 2px, transparent 3px),
+                
+                /* Additional subtle texture */
+                radial-gradient(ellipse at 30% 70%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+                
+            background-size: 
+                100% 100%,
+                80px 80px, 100px 100px, 90px 90px, 70px 70px,
+                150px 150px, 180px 180px, 120px 120px, 200px 200px, 110px 110px, 140px 140px, 160px 160px, 130px 130px, 170px 170px, 190px 190px, 210px 210px, 220px 220px,
+                400px 400px, 450px 450px;
+                
+            background-position: 
+                center center,
+                0 0, 40px 40px, 20px 60px, 60px 20px,
+                0 0, 50px 50px, 100px 30px, 150px 80px, 250px 120px, 200px 160px, 300px 40px, 180px 200px, 320px 140px, 80px 180px, 380px 60px, 120px 240px,
+                0 0, 250px 250px;
+            
+            animation: neural-pulse 12s ease-in-out infinite, connection-flow 20s linear infinite;
         }
 
         .paisley-pattern {
@@ -69,14 +110,6 @@
             background-position: 0 0, 75px 75px, 150px 150px;
             animation: paisley-flow 45s infinite linear;
             pointer-events: none;
-        }
-
-        .mirror-surface {
-            background: rgba(244, 241, 232, 0.02);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(244, 241, 232, 0.08);
-            border-radius: 20px;
-            position: relative;
         }
 
         .mirror-surface::before {
@@ -103,6 +136,7 @@
             width: 280px;
             height: 100vh;
             background: rgba(15, 10, 26, 0.95);
+            -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
             border-right: 1px solid rgba(244, 241, 232, 0.1);
             overflow-y: auto;
@@ -236,6 +270,7 @@
             margin: 16px 0;
             padding: 20px 24px;
             background: rgba(28, 20, 41, 0.7);
+            -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(244, 241, 232, 0.1);
             border-radius: 12px;
@@ -336,6 +371,7 @@
             left: 400px;
             border-radius: 25px;
             background: rgba(15, 10, 26, 0.4);
+            -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(244, 241, 232, 0.08);
         }
@@ -362,6 +398,39 @@
             0% { box-shadow: 0 0 20px rgba(45, 27, 105, 0.2); }
             50% { box-shadow: 0 0 40px rgba(184, 134, 11, 0.3); }
             100% { box-shadow: 0 0 20px rgba(45, 27, 105, 0.2); }
+        }
+
+        /* Neural Network Animations */
+        @keyframes neural-pulse {
+            0%, 100% { 
+                filter: brightness(1) contrast(1) hue-rotate(0deg);
+            }
+            25% { 
+                filter: brightness(1.1) contrast(1.1) hue-rotate(5deg);
+            }
+            50% { 
+                filter: brightness(1.2) contrast(1.2) hue-rotate(10deg);
+            }
+            75% { 
+                filter: brightness(1.1) contrast(1.1) hue-rotate(5deg);
+            }
+        }
+
+        @keyframes connection-flow {
+            0% { 
+                background-position: 
+                    center center,
+                    0 0, 40px 40px, 20px 60px, 60px 20px,
+                    0 0, 50px 50px, 100px 30px, 150px 80px, 250px 120px, 200px 160px, 300px 40px, 180px 200px, 320px 140px, 80px 180px, 380px 60px, 120px 240px,
+                    0 0, 250px 250px;
+            }
+            100% { 
+                background-position: 
+                    center center,
+                    80px 80px, 120px 120px, 110px 150px, 140px 100px,
+                    150px 150px, 230px 230px, 280px 210px, 330px 260px, 430px 300px, 380px 340px, 480px 220px, 360px 380px, 500px 320px, 260px 360px, 560px 240px, 300px 420px,
+                    400px 400px, 700px 700px;
+            }
         }
 
         .loading-text {
@@ -494,7 +563,7 @@
 
             <!-- Other Content Panes (Hidden by default) -->
             <div class="content-pane" id="get-started">
-                <div style="text-align: center; padding: 100px; color: var(--text-primary);">
+                <div class="placeholder-content">
                     <h2>Get Started with PurpleBrain</h2>
                     <p>Welcome to your Purple Rain AI workspace. Navigate through the sidebar to explore different sections.</p>
                 </div>
@@ -569,6 +638,7 @@
                     left: 50%;
                     transform: translate(-50%, -50%);
                     background: rgba(28, 20, 41, 0.95);
+                    -webkit-backdrop-filter: blur(20px);
                     backdrop-filter: blur(20px);
                     border: 1px solid rgba(244, 241, 232, 0.2);
                     border-radius: 20px;

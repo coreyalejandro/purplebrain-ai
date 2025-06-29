@@ -13,17 +13,20 @@ A multi-agent AI orchestration platform inspired by Prince's Purple Rain album, 
 ## 🚀 Quick Start
 
 1. **Install Dependencies**:
+
    ```bash
    pip install -r requirements.txt
    ```
 
 2. **Set up Environment**:
+
    ```bash
    cp .env.example .env
    # Edit .env and add your OpenAI and Exa.ai API keys
    ```
 
 3. **Run PurpleBrain**:
+
    ```bash
    python server.py
    ```
@@ -34,26 +37,31 @@ A multi-agent AI orchestration platform inspired by Prince's Purple Rain album, 
 ## 🤖 AI Agents
 
 ### Research Agent
+
 - **Persona**: Nobel Laureate Researcher
 - **Powered by**: Exa.ai API
 - **Capabilities**: Web search, academic research, fact verification, multi-source analysis
 
 ### Fact-Check Agent  
+
 - **Persona**: Truth Guardian
 - **Purpose**: Combat AI hallucinations
 - **Capabilities**: Fact verification, source validation, bias detection, accuracy scoring
 
 ### Writing Agent
+
 - **Persona**: Gifted Code-Switcher & Master Wordsmith
 - **Quality**: NYT/New Yorker caliber
 - **Capabilities**: Code-switching, style adaptation, audience targeting, narrative crafting
 
 ### Visionary Agent
+
 - **Persona**: Master of Souls in Data
 - **Inspiration**: Frida Kahlo × Kadir Nelson × Banksy × Basquiat
 - **Capabilities**: Data visualization, artistic interpretation, soul infusion, mixed media creation
 
 ### Conductor Agent
+
 - **Persona**: AI Symphony Conductor  
 - **Purpose**: Multi-agent orchestration
 - **Capabilities**: Workflow coordination, task delegation, result synthesis
@@ -63,6 +71,7 @@ A multi-agent AI orchestration platform inspired by Prince's Purple Rain album, 
 "Dearly beloved, we are gathered here today to get through this thing called life" - Prince 💜
 
 This platform celebrates neurodivergent thinking patterns through:
+
 - **Mirror Effects**: Reflecting different perspectives and cognitive styles
 - **Paisley Patterns**: Representing the complex, beautiful patterns of neurodivergent minds
 - **Purple Rain Aesthetics**: Deep, sophisticated colors that honor Prince's artistic vision
@@ -71,6 +80,7 @@ This platform celebrates neurodivergent thinking patterns through:
 ## 🔧 API Usage
 
 ### Activate Individual Agents
+
 ```bash
 curl -X POST http://localhost:8000/api/agent/research \
   -H "Content-Type: application/json" \
@@ -78,6 +88,7 @@ curl -X POST http://localhost:8000/api/agent/research \
 ```
 
 ### Real-time Agent Communication
+
 Connect via Socket.IO for live agent interactions and status updates.
 
 ## 🌟 Contributing

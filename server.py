@@ -548,7 +548,7 @@ if __name__ == '__main__':
     logger.info("💜 Your Purple Rain AI Workspace")
     
     # Get port from environment or use default
-    port = int(os.environ.get('PORT', 8000))
+    port = 8000  # Force port 8000 to avoid conflicts
     
     # Run the server
     socketio.run(app, 
