@@ -6,6 +6,7 @@ import { Toaster } from 'react-hot-toast'
 // Components
 import Sidebar from './components/Sidebar'
 import AgentStore from './components/AgentStore'
+import AgentBuilder from './components/AgentBuilder'
 import Dashboard from './components/Dashboard'
 import KnowledgeBase from './components/KnowledgeBase'
 import PromptLab from './components/PromptLab'
