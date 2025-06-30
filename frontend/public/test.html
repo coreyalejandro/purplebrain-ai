@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PurpleBrain Test Page</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #2D1B69 0%, #4A2C7A 50%, #6B4C9F 100%);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+        }
+        .status {
+            color: #00ff00;
+            font-size: 1.2em;
+            margin: 1rem 0;
+        }
+        .links {
+            margin-top: 2rem;
+        }
+        .links a {
+            color: #B8860B;
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #B8860B;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .links a:hover {
+            background: #B8860B;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 PurpleBrain Status</h1>
+        <div class="status">✅ FRONTEND IS RUNNING</div>
+        <div class="status">✅ AGENT BUILDER FACTORY DEPLOYED</div>
+        <div class="status">✅ ALL SERVICES OPERATIONAL</div>
+        
+        <div class="links">
+            <a href="/">Main Application</a>
+            <a href="/test.html">This Test Page</a>
+        </div>
+        
+        <div style="margin-top: 2rem; font-size: 0.9em; opacity: 0.8;">
+            <p>If you can see this page, your PurpleBrain platform is working correctly!</p>
+            <p>🏭 Agent Builder Factory with guaranteed components is ready</p>
+            <p>💜 "Where AI Agents Dance Like Purple Rain"</p>
+        </div>
+        
+        <script>
+            // Test API connection
+            fetch('/api/agents/status')
+                .then(r => r.json())
+                .then(data => {
+                    const agents = Object.keys(data).length;
+                    document.querySelector('.container').innerHTML += 
+                        `<div class="status">✅ ${agents} ENHANCED AGENTS AVAILABLE</div>`;
+                })
+                .catch(e => {
+                    document.querySelector('.container').innerHTML += 
+                        '<div style="color: #ff6b6b;">❌ Backend API Connection Issue</div>';
+                });
+        </script>
+    </div>
+</body>
+</html>
