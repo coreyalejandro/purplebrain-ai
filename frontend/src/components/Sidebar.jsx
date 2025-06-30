@@ -22,6 +22,7 @@ const Sidebar = ({ currentSection, onSectionChange }) => {
       title: 'PurpleBrain Builder',
       items: [
         { id: 'dashboard', label: 'Dashboard', icon: Home, description: 'Overview & Quick Actions' },
+        { id: 'agent-builder', label: 'Agent Builder', icon: Cpu, description: '🏭 Visual Agent Factory' },
         { id: 'knowledge-base', label: 'Knowledge Base', icon: Database, description: 'AI-Powered Knowledge Hub' },
         { id: 'agent-store', label: 'AI Agents', icon: Cpu, description: 'Enhanced Agent Collection' },
         { id: 'prompt-lab', label: 'Prompt Lab', icon: Zap, description: 'Prompt Engineering Workspace' },
