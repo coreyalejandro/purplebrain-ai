@@ -209,6 +209,11 @@
   .neural-glow:hover {
     filter: drop-shadow(0 0 12px rgba(184, 134, 11, 0.6));
   }
+  
+  /* Custom border utilities */
+  .border-3 {
+    border-width: 3px;
+  }
 }
 
 /* Custom Animations */
