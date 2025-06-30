@@ -3,11 +3,14 @@ import requests
 import json
 import sys
 import time
+import os
 from datetime import datetime
 
 class PurpleBrainAPITester:
-    def __init__(self, base_url="http://localhost:8001"):
-        self.base_url = base_url
+    def __init__(self, base_url=None):
+        # Get the backend URL from environment or use default
+        self.base_url = base_url or os.environ.get('REACT_APP_BACKEND_URL', 'http://localhost:8001')
+        print(f"Using backend URL: {self.base_url}")
         self.tests_run = 0
         self.tests_passed = 0
         self.test_results = []
