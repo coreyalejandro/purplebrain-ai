@@ -160,7 +160,7 @@
   
   /* Loading Animation */
   .loading-spinner {
-    @apply inline-block w-6 h-6 border-3 border-paisley-gold/30;
+    @apply inline-block w-6 h-6 border-4 border-paisley-gold/30;
     @apply border-t-paisley-gold rounded-full;
     animation: spin 1s linear infinite;
   }
