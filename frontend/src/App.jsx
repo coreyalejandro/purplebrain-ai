@@ -107,6 +107,7 @@ function App() {
               className="h-full"
             >
               {currentSection === 'dashboard' && <Dashboard />}
+              {currentSection === 'agent-builder' && <AgentBuilder />}
               {currentSection === 'agent-store' && <AgentStore />}
               {currentSection === 'knowledge-base' && <KnowledgeBase />}
               {currentSection === 'prompt-lab' && <PromptLab />}
