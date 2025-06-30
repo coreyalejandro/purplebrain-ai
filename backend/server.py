@@ -131,7 +131,7 @@ class EnhancedAgent:
         log_entry = {
             'agent_id': self.agent_id,
             'agent_name': self.name,
-            'task': task.dict(),
+            'task': self._make_json_safe(task.dict()),
             'timestamp': datetime.now(),
             'status': 'started'
         }
