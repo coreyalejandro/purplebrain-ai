@@ -47,6 +47,11 @@
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-purple-rain-mist;
   }
+
+  /* Custom border utilities */
+  .border-3 {
+    border-width: 3px;
+  }
 }
 
 @layer components {
