@@ -139,7 +139,20 @@ class EnhancedAgent:
     
     async def _store_result(self, result: Dict):
         """Store execution result"""
-        db.agent_results.insert_one(result)
+        # Convert to JSON-safe format before storing
+        json_safe_result = self._make_json_safe(result)
+        db.agent_results.insert_one(json_safe_result)
+    
+    def _make_json_safe(self, obj):
+        """Convert object to JSON-safe format"""
+        if isinstance(obj, dict):
+            return {k: self._make_json_safe(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [self._make_json_safe(item) for item in obj]
+        elif hasattr(obj, '__dict__'):
+            return self._make_json_safe(obj.__dict__)
+        else:
+            return obj
 
 # NEXT-LEVEL VISUALIZATION AGENT
 class VisualizationAgent(EnhancedAgent):
