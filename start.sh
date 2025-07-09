@@ -36,9 +36,9 @@ fi
 
 echo ""
 echo "🚀 Launching PurpleBrain Server..."
-echo "🌐 Open http://localhost:8000 in your browser"
+echo "🌐 Open http://localhost:8001 in your browser"
 
 echo ""
 
 # Start the server
-uvicorn backend.server:app --host 0.0.0.0 --port 8000
+uvicorn backend.server:app --host 0.0.0.0 --port 8001
