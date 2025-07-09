@@ -59,7 +59,11 @@ db = client.purplebrain
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 # Pydantic models
+from pydantic import BaseModel, ConfigDict
+
+# Pydantic models
 class AgentTask(BaseModel):
+    model_config = ConfigDict(json_schema_extra=None)
     query: str
     data: Optional[Dict] = None
     style: Optional[str] = "professional"
@@ -67,6 +71,7 @@ class AgentTask(BaseModel):
     options: Optional[Dict] = None
 
 class AgentResponse(BaseModel):
+    model_config = ConfigDict(json_schema_extra=None)
     success: bool
     agent: str
     result: Dict

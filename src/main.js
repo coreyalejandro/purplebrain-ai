@@ -3,6 +3,10 @@
 
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const ResearchAgent = require('./agents/research/ResearchAgent');
+const FactCheckAgent = require('./agents/factcheck/FactCheckAgent');
+const WritingAgent = require('./agents/writing/WritingAgent');
+const VisionaryAgent = require('./agents/visionary/VisionaryAgent');
 
 let mainWindow;
 
@@ -55,23 +59,27 @@ app.on('activate', () => {
 
 // IPC handlers for agent communication
 ipcMain.handle('agent-research', async (event, query) => {
-  // Research Agent will be implemented here
-  return { status: 'Agent system initializing...' };
+  const researchAgent = new ResearchAgent();
+  const result = await researchAgent.conductResearch(query);
+  return result;
 });
 
 ipcMain.handle('agent-factcheck', async (event, content) => {
-  // Fact-checking Agent will be implemented here
-  return { status: 'Fact-checking system ready...' };
+  const factCheckAgent = new FactCheckAgent();
+  const result = await factCheckAgent.factCheck(content);
+  return result;
 });
 
 ipcMain.handle('agent-write', async (event, data) => {
-  // Writing Agent (code-switcher) will be implemented here
-  return { status: 'Writing agent standing by...' };
+  const writingAgent = new WritingAgent();
+  const result = await writingAgent.generateText(data.prompt, data.options);
+  return result;
 });
 
 ipcMain.handle('agent-visualize', async (event, data) => {
-  // Visionary Agent (artistic visualization) will be implemented here
-  return { status: 'Visionary agent awakening...' };
+  const visionaryAgent = new VisionaryAgent();
+  const result = await visionaryAgent.createVision(data.prompt, data.options);
+  return result;
 });
 
 console.log('🎵 PurpleBrain Desktop Environment Loading...');

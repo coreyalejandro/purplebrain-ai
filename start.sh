@@ -20,7 +20,8 @@ source venv/bin/activate
 
 # Install dependencies
 echo "📚 Installing dependencies..."
-pip install -r requirements.txt
+source venv/bin/activate
+pip install -r backend/requirements.txt
 
 # Check for .env file
 if [ ! -f ".env" ]; then
@@ -36,7 +37,8 @@ fi
 echo ""
 echo "🚀 Launching PurpleBrain Server..."
 echo "🌐 Open http://localhost:8000 in your browser"
+
 echo ""
 
 # Start the server
-python server.py
+uvicorn backend.server:app --host 0.0.0.0 --port 8000
