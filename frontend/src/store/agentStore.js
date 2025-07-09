@@ -45,7 +45,7 @@ export const useAgentStore = create(
       clearHistory: () => set({ executionHistory: [] }),
     }),
     {
-      name: 'purplebrain-agents',
+      name: 'purplebrain-ai-agents',
     }
   )
 )
@@ -98,7 +98,7 @@ export const useUIStore = create(
       })),
     }),
     {
-      name: 'purplebrain-ui',
+      name: 'purplebrain-ai-ui',
     }
   )
 )
@@ -156,7 +156,7 @@ export const useKnowledgeStore = create(
       }
     }),
     {
-      name: 'purplebrain-knowledge',
+      name: 'purplebrain-ai-knowledge',
     }
   )
 )

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PurpleBrain Enhanced Backend - Next-Level AI Agent Platform
+PurpleBrain-AI Enhanced Backend - Next-Level AI Agent Platform
 FastAPI + MongoDB + Real Agent Integration
 Built for the Solo Billion-Dollar AI Entrepreneur
 """
@@ -36,7 +36,7 @@ logger = logging.getLogger(__name__)
 
 # Initialize FastAPI
 app = FastAPI(
-    title="PurpleBrain API",
+    title="PurpleBrain-AI API",
     description="Next-Level AI Agent Orchestration Platform",
     version="2.0.0"
 )
@@ -1212,7 +1212,7 @@ agents = {
 @app.get("/")
 async def root():
     """Root endpoint"""
-    return {"message": "🎵 PurpleBrain Enhanced API - Next-Level AI Agent Platform"}
+    return {"message": "🎵 PurpleBrain-AI Enhanced API - Next-Level AI Agent Platform"}
 
 @app.get("/api/agents/status")
 async def get_agents_status():
@@ -1282,7 +1282,7 @@ async def websocket_endpoint(websocket: WebSocket):
 
 if __name__ == "__main__":
     import uvicorn
-    logger.info("🎵 Starting PurpleBrain Enhanced Server...")
+    logger.info("🎵 Starting PurpleBrain-AI Enhanced Server...")
     logger.info("💜 Next-Level AI Agent Platform Ready!")
     
     uvicorn.run(

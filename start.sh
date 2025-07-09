@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# PurpleBrain Startup Script
+# PurpleBrain-AI Startup Script
 # 🎵 Your Purple Rain AI Workspace 💜
 
-echo "🎵 Starting PurpleBrain - Your Purple Rain AI Workspace 💜"
+echo "🎵 Starting PurpleBrain-AI - Your Purple Rain AI Workspace 💜"
 echo "🧠 Celebrating Neurodivergent Brilliance"
 echo "🎭 Where AI Agents Dance Like Purple Rain"
 echo ""
@@ -35,7 +35,7 @@ if [ ! -f ".env" ]; then
 fi
 
 echo ""
-echo "🚀 Launching PurpleBrain Server..."
+echo "🚀 Launching PurpleBrain-AI Server..."
 echo "🌐 Open http://localhost:8001 in your browser"
 
 echo ""

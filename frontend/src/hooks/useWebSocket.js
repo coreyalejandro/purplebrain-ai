@@ -21,7 +21,7 @@ export const useWebSocket = () => {
     socketRef.current.on('connect', () => {
       console.log('🔌 WebSocket connected')
       setIsConnected(true)
-      toast.success('Connected to PurpleBrain', { duration: 2000 })
+      toast.success('Connected to PurpleBrain-AI', { duration: 2000 })
     })
 
     socketRef.current.on('disconnect', (reason) => {

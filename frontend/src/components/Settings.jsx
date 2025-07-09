@@ -30,7 +30,7 @@ const Settings = () => {
             Comprehensive Platform Settings
           </h2>
           <p className="text-cream-muted/80 max-w-2xl mx-auto mb-8">
-            Configure your PurpleBrain experience, manage API keys, customize themes, 
+            Configure your PurpleBrain-AI experience, manage API keys, customize themes, 
             and control security settings for your AI workspace.
           </p>
           

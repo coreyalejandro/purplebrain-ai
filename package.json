@@ -1,7 +1,7 @@
 {
-  "name": "purplebrain",
+  "name": "purplebrain-ai",
   "version": "1.0.0",
-  "description": "Your Purple Rain Desktop Environment - AI Agent Orchestration Platform",
+  "description": "Your Purple Rain AI Workspace - AI Agent Orchestration Platform",
   "main": "src/main.js",
   "scripts": {
     "dev": "vite",

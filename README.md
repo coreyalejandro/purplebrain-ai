@@ -1,4 +1,4 @@
-# 🎵 PurpleBrain - Your Purple Rain AI Workspace 💜
+# 🎵 PurpleBrain-AI - Your Purple Rain AI Workspace 💜
 
 A multi-agent AI orchestration platform inspired by Prince's Purple Rain album, designed for neurodivergent brilliance and advanced visualization workflows.
 
@@ -25,7 +25,7 @@ A multi-agent AI orchestration platform inspired by Prince's Purple Rain album, 
    # Edit .env and add your OpenAI and Exa.ai API keys
    ```
 
-3. **Run PurpleBrain**:
+3. **Run PurpleBrain-AI**:
 
    ```bash
    python server.py

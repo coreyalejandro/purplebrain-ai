@@ -48,7 +48,7 @@ const StatusIndicator = ({ backendStatus, wsConnected }) => {
             {getStatusText()}
           </div>
           <div className="text-xs text-cream-muted/60">
-            PurpleBrain Status
+            PurpleBrain-AI Status
           </div>
         </div>
         

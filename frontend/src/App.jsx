@@ -68,7 +68,7 @@ function App() {
         >
           <div className="loading-spinner w-16 h-16 mb-6"></div>
           <h2 className="text-2xl font-semibold text-paisley-gold mb-2">
-            🎵 PurpleBrain Initializing...
+            🎵 PurpleBrain-AI Initializing...
           </h2>
           <p className="text-cream-muted">Your Purple Rain AI Workspace</p>
         </motion.div>
